@@ -1,49 +1,103 @@
 library(shiny)
 library(bslib)
-library(ggplot2)
 library(shinychat)
 library(elmer)
+library(shinyAce)
+library(magrittr) # For piping
+library(png) # For reading uploaded PNG images
 
 ui <- page_sidebar(
   title = "R plot alt text generator",
   sidebar = sidebar(
-          aceEditor("code", 
-                mode = "r",               
-                theme = "textmate",       
-                height = "200px",         
-                value = "plot(cars)",
-                placeholder = "Enter R code that generates a plot"),
-    actionButton("generate_plot", "Generate visualization and alt text")
+    width = 500,  # Increase the sidebar width (default is 250)
+    tabsetPanel(
+      tabPanel("Generate Plot",
+               aceEditor(
+                 "code",
+                 mode = "r",
+                 theme = "textmate",
+                 height = "400px",  # Increase the editor height for better visibility
+                 value = "plot(cars)",
+                 placeholder = "Enter R code that generates a plot"
+               ),
+               actionButton("generate_plot", "Generate visualization and alt text")
+      ),
+      tabPanel("Upload Plot",
+               fileInput("plot_upload", "Upload a plot image", accept = c("image/png"))
+      )
+    )
   ),
-  card(plotOutput("plot"), verbatimTextOutput("error"))
+  card(plotOutput("plot", height = "400px"), verbatimTextOutput("error")),
+  card(
+    tags$div(style = "height: 150px; overflow-y: auto;",  # Increase the height of the alt text card
+             tags$p(id = "alt_text_output", "")  # Placeholder for alt text
+    )
+  ),
+  tags$script(HTML("
+    // Use Shiny to handle custom message to update alt text
+    Shiny.addCustomMessageHandler('update_alt_text', function(message) {
+      document.getElementById('alt_text_output').innerText = message;
+    });
+  "))
 )
 
 server <- function(input, output, session) {
-  chat <- elmer::new_chat_openai(system_prompt = "You are an assistant who generates alt text for plots.")
-  
+  chat <- elmer::new_chat_openai(
+    model = "gpt-4o-mini",
+    system_prompt = "Generate a friendly and descriptive alt text for the following plot.",
+    echo = TRUE
+  )
+
+  plot_generated <- reactiveVal(FALSE)
+  uploaded_plot <- reactiveVal(NULL)
+
   observeEvent(input$generate_plot, {
-    output$error <- renderText({
-      ""
-    })
-    
-    output$plot <- renderPlot({
-      
-    })
-    
-    code <- input$code
-    result <- tryCatch({
-      eval(parse(text = code))
-    }, error = function(e) {
-      e
-    })
-    
-    if (inherits(result, "ggplot") || is.null(result)) {
-      output$plot <- renderPlot({
-        eval(parse(text = code))
-      })
-    } else {
-      output$error <- renderText("Error: The code did not generate a valid plot.")
+    plot_generated(TRUE)
+    uploaded_plot(NULL) # Reset uploaded plot when generating a new plot
+  })
+
+  observeEvent(input$plot_upload, {
+    uploaded_plot(input$plot_upload)
+    plot_generated(FALSE) # Reset generated plot when uploading a new plot
+  })
+  
+  output$plot <- renderPlot({
+    if (plot_generated()) {
+      eval(parse(text = input$code))
+    } else if (!is.null(uploaded_plot())) {
+      img <- readPNG(uploaded_plot()$datapath)
+      grid::grid.raster(img)
     }
+  })
+
+  output$error <- renderText({
+    req(input$generate_plot)
+    
+    if (input$code == "" && is.null(uploaded_plot())) {
+      "Error: No R code entered or file uploaded. Please provide code to generate a plot or upload an image."
+    } else if (plot_generated() && !tryCatch({ eval(parse(text = input$code)); TRUE }, error = function(e) FALSE)) {
+      "Error: The code did not generate a valid plot."
+    } else {
+      ""
+    }
+  })
+
+  observe({
+    if (plot_generated()) {
+      code <- input$code
+      alt_text_response <- chat$chat(paste("Here is the code that generated the plot:", code))
+      session$sendCustomMessage("update_alt_text", alt_text_response)
+    } else if (!is.null(uploaded_plot())) {
+      file_path <- uploaded_plot()$datapath
+      alt_text_response <- chat$chat(elmer::content_image_file(file_path), "Please generate an alt text for this plot image.")
+      session$sendCustomMessage("update_alt_text", alt_text_response)
+    } else {
+      session$sendCustomMessage("update_alt_text", "")
+    }
+  })
+
+  session$onSessionEnded(function() {
+    chat$close()
   })
 }
 
