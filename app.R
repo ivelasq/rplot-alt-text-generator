@@ -15,7 +15,7 @@ ui <- page_sidebar(
   theme = bs_theme(
     bootswatch = "simplex",
     base_font = font_google("Lexend"),
-    navbar_bg = "#8b4500"
+    navbar_bg = "#39254D"
   ),
   sidebar = sidebar(width = 500, tabsetPanel(
     tabPanel(
