@@ -7,7 +7,12 @@ library(elmer)
 ui <- page_sidebar(
   title = "R plot alt text generator",
   sidebar = sidebar(
-    textAreaInput("code", "Enter R code that generates a plot:", rows = 5),
+          aceEditor("code", 
+                mode = "r",               
+                theme = "textmate",       
+                height = "200px",         
+                value = "plot(cars)",
+                placeholder = "Enter R code that generates a plot"),
     actionButton("generate_plot", "Generate visualization and alt text")
   ),
   card(plotOutput("plot"), verbatimTextOutput("error"))
