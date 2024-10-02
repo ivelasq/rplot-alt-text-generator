@@ -22,7 +22,7 @@
 
 6. Include a link to the raw data if possible.
 
-Structure
+## Structure
 
 Use the following structure for alt text:
 
