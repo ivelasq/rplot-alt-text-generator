@@ -11,38 +11,49 @@ readme_url <- "https://raw.githubusercontent.com/ivelasq/rplot-alt-text-generato
 readme_content <- paste(readLines(readme_url, warn = FALSE), collapse = "\n")
 
 ui <- page_sidebar(
-  title = "R plot alt text generator",
-  sidebar = sidebar(
-    width = 500,
-    tabsetPanel(
-      tabPanel("Generate Plot",
-               aceEditor(
-                 "code",
-                 mode = "r",
-                 theme = "textmate",
-                 height = "400px",
-                 value = "plot(cars)",
-                 placeholder = "Enter R code that generates a plot"
-               ),
-               actionButton("generate_plot", "Generate visualization and alt text")
+  title = "altR",
+  theme = bs_theme(
+    bootswatch = "simplex",
+    base_font = font_google("Lexend"),
+    navbar_bg = "#8b4500"
+  ),
+  sidebar = sidebar(width = 500, tabsetPanel(
+    tabPanel(
+      "Generate Plot",
+      aceEditor(
+        "code",
+        mode = "r",
+        theme = "eclipse",
+        height = "400px",
+        fontSize = "16",
+        value = "plot(mtcars$hp)",
+        placeholder = "Enter R code that generates a plot"
       ),
-      tabPanel("Upload Plot",
-               fileInput("plot_upload", "Upload a plot image", accept = c("image/png"))
-      )
+      actionButton("generate_plot", "Generate visualization and alt text")
+    ),
+    tabPanel(
+      "Upload Plot",
+      fileInput("plot_upload", label = "", accept = c("image/png"))
     )
-  ),
-  card(plotOutput("plot", height = "400px"), verbatimTextOutput("error")),
+  )),
   card(
-    tags$div(style = "height: 150px; overflow-y: auto;",
-             tags$p(id = "alt_text_output", "")
-    )
+    card_header("Plot"),
+    plotOutput("plot", height = "400px"),
+    verbatimTextOutput("error")
   ),
-  tags$script(HTML("
+  card(
+    card_header("Generated alternative text"),
+    tags$div(style = "height: 150px; overflow-y: auto;", tags$p(id = "alt_text_output", ""))),
+  tags$script(
+    HTML(
+      "
     // Use Shiny to handle custom message to update alt text
     Shiny.addCustomMessageHandler('update_alt_text', function(message) {
       document.getElementById('alt_text_output').innerText = message;
     });
-  "))
+  "
+    )
+  )
 )
 
 server <- function(input, output, session) {
@@ -51,19 +62,20 @@ server <- function(input, output, session) {
     system_prompt = paste(
       "Generate a friendly and descriptive alt text for the following plot.",
       "Refer to the following guidelines:\n\n",
-      readme_content
-    ), 
+      readme_content,
+      "If, and only if, the code does not produce a valid plot, instead, give suggestions on how to fix the code."
+    ),
     echo = TRUE
   )
-
+  
   plot_generated <- reactiveVal(FALSE)
   uploaded_plot <- reactiveVal(NULL)
-
+  
   observeEvent(input$generate_plot, {
     plot_generated(TRUE)
     uploaded_plot(NULL)
   })
-
+  
   observeEvent(input$plot_upload, {
     uploaded_plot(input$plot_upload)
     plot_generated(FALSE)
@@ -77,19 +89,24 @@ server <- function(input, output, session) {
       grid::grid.raster(img)
     }
   })
-
+  
   output$error <- renderText({
     req(input$generate_plot)
     
     if (input$code == "" && is.null(uploaded_plot())) {
       "Error: No R code entered or file uploaded. Please provide code to generate a plot or upload an image."
-    } else if (plot_generated() && !tryCatch({ eval(parse(text = input$code)); TRUE }, error = function(e) FALSE)) {
+    } else if (plot_generated() &&
+               !tryCatch({
+                 eval(parse(text = input$code))
+                 TRUE
+               }, error = function(e)
+                 FALSE)) {
       "Error: The code did not generate a valid plot."
     } else {
       ""
     }
   })
-
+  
   observe({
     if (plot_generated()) {
       code <- input$code
@@ -97,13 +114,16 @@ server <- function(input, output, session) {
       session$sendCustomMessage("update_alt_text", alt_text_response)
     } else if (!is.null(uploaded_plot())) {
       file_path <- uploaded_plot()$datapath
-      alt_text_response <- chat$chat(elmer::content_image_file(file_path), "Please generate an alt text for this plot image.")
+      alt_text_response <- chat$chat(
+        elmer::content_image_file(file_path),
+        "Please generate an alt text for this plot image."
+      )
       session$sendCustomMessage("update_alt_text", alt_text_response)
     } else {
       session$sendCustomMessage("update_alt_text", "")
     }
   })
-
+  
   session$onSessionEnded(function() {
     chat$close()
   })
