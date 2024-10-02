@@ -4,6 +4,7 @@ library(shinychat)
 library(elmer)
 library(shinyAce)
 library(magrittr)
+library(ggplot2)
 library(png)
 
 readme_url <- "https://raw.githubusercontent.com/ivelasq/rplot-alt-text-generator/main/guidelines.md"
