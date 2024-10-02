@@ -3,20 +3,23 @@ library(bslib)
 library(shinychat)
 library(elmer)
 library(shinyAce)
-library(magrittr) # For piping
-library(png) # For reading uploaded PNG images
+library(magrittr)
+library(png)
+
+readme_url <- "https://raw.githubusercontent.com/ivelasq/rplot-alt-text-generator/main/guidelines.md"
+readme_content <- paste(readLines(readme_url, warn = FALSE), collapse = "\n")
 
 ui <- page_sidebar(
   title = "R plot alt text generator",
   sidebar = sidebar(
-    width = 500,  # Increase the sidebar width (default is 250)
+    width = 500,
     tabsetPanel(
       tabPanel("Generate Plot",
                aceEditor(
                  "code",
                  mode = "r",
                  theme = "textmate",
-                 height = "400px",  # Increase the editor height for better visibility
+                 height = "400px",
                  value = "plot(cars)",
                  placeholder = "Enter R code that generates a plot"
                ),
@@ -29,8 +32,8 @@ ui <- page_sidebar(
   ),
   card(plotOutput("plot", height = "400px"), verbatimTextOutput("error")),
   card(
-    tags$div(style = "height: 150px; overflow-y: auto;",  # Increase the height of the alt text card
-             tags$p(id = "alt_text_output", "")  # Placeholder for alt text
+    tags$div(style = "height: 150px; overflow-y: auto;",
+             tags$p(id = "alt_text_output", "")
     )
   ),
   tags$script(HTML("
@@ -44,7 +47,11 @@ ui <- page_sidebar(
 server <- function(input, output, session) {
   chat <- elmer::new_chat_openai(
     model = "gpt-4o-mini",
-    system_prompt = "Generate a friendly and descriptive alt text for the following plot.",
+    system_prompt = paste(
+      "Generate a friendly and descriptive alt text for the following plot.",
+      "Refer to the following guidelines:\n\n",
+      readme_content
+    ), 
     echo = TRUE
   )
 
@@ -53,12 +60,12 @@ server <- function(input, output, session) {
 
   observeEvent(input$generate_plot, {
     plot_generated(TRUE)
-    uploaded_plot(NULL) # Reset uploaded plot when generating a new plot
+    uploaded_plot(NULL)
   })
 
   observeEvent(input$plot_upload, {
     uploaded_plot(input$plot_upload)
-    plot_generated(FALSE) # Reset generated plot when uploading a new plot
+    plot_generated(FALSE)
   })
   
   output$plot <- renderPlot({
