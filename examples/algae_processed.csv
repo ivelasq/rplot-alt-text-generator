@@ -1,0 +1,153 @@
+,species,temp_light,growth_rate,temp,light,type,salinity
+1,Caloneis schroderi,5.5000,-0.01,5,5000,freshwater,0
+2,Chaetoceros gracilis,5.5000,-0.01,5,5000,marine,35
+3,Chaetoceros simplex,5.5000,-0.06,5,5000,marine,35
+4,Chlorella ellipsoidea,5.5000,0.03,5,5000,freshwater,0
+5,Chlorella stigmatophora,5.5000,0.01,5,5000,marine,35
+6,Chlorella vulgaris (freshwater),5.5000,-0.25,5,5000,freshwater,0
+7,Dunaniella tertiolecta,5.5000,0.28,5,5000,marine,35
+8,Cyclotella sp. NUFP-9,5.5000,0.16,5,5000,freshwater,0
+9,Hanzchia marina,5.5000,-0.36,5,5000,marine,35
+10,Isochrysis galbana,5.5000,-0.57,5,5000,marine,35
+11,Isochrysis aff. galbana,5.5000,-0.62,5,5000,marine,35
+12,Nannochlorois oculata,5.5000,0.01,5,5000,marine,35
+13,Nannochloris salina,5.5000,0.06,5,5000,marine,35
+14,Navicula incerta,5.5000,0.16,5,5000,marine,35
+15,Nitzscia sp.,5.5000,-0.1,5,5000,marine,35
+16,Skeletonema costatum,5.5000,0.29,5,5000,marine,35
+17,Tetraselmus suecica,5.5000,0.04,5,5000,marine,35
+18,Thalassiosira fluviatilis,5.5000,0.03,5,5000,marine,35
+19,Thalassiosira sp.,5.5000,-0.29,5,5000,marine,35
+20,Caloneis schroderi,5.2500,-0.5,5,2500,freshwater,0
+21,Chaetoceros gracilis,5.2500,-0.05,5,2500,marine,35
+22,Chaetoceros simplex,5.2500,-0.01,5,2500,marine,35
+23,Chlorella ellipsoidea,5.2500,0.02,5,2500,freshwater,0
+24,Chlorella stigmatophora,5.2500,0.24,5,2500,marine,35
+25,Chlorella vulgaris (freshwater),5.2500,0,5,2500,freshwater,0
+26,Dunaniella tertiolecta,5.2500,0.17,5,2500,marine,35
+27,Cyclotella sp. NUFP-9,5.2500,0.08,5,2500,freshwater,0
+28,Hanzchia marina,5.2500,-0.07,5,2500,marine,35
+29,Isochrysis galbana,5.2500,-0.07,5,2500,marine,35
+30,Isochrysis aff. galbana,5.2500,-0.67,5,2500,marine,35
+31,Nannochlorois oculata,5.2500,-0.03,5,2500,marine,35
+32,Nannochloris salina,5.2500,0.07,5,2500,marine,35
+33,Navicula incerta,5.2500,0.2,5,2500,marine,35
+34,Nitzscia sp.,5.2500,0.12,5,2500,marine,35
+35,Skeletonema costatum,5.2500,0.34,5,2500,marine,35
+36,Tetraselmus suecica,5.2500,-0.02,5,2500,marine,35
+37,Thalassiosira fluviatilis,5.2500,0.06,5,2500,marine,35
+38,Thalassiosira sp.,5.2500,-0.17,5,2500,marine,35
+39,Caloneis schroderi,10.5000,-0.1,10,5000,freshwater,0
+40,Chaetoceros gracilis,10.5000,0.16,10,5000,marine,35
+41,Chaetoceros simplex,10.5000,0.27,10,5000,marine,35
+42,Chlorella ellipsoidea,10.5000,0.58,10,5000,freshwater,0
+43,Chlorella stigmatophora,10.5000,0.36,10,5000,marine,35
+44,Chlorella vulgaris (freshwater),10.5000,0.21,10,5000,freshwater,0
+45,Dunaniella tertiolecta,10.5000,0.43,10,5000,marine,35
+46,Cyclotella sp. NUFP-9,10.5000,0,10,5000,freshwater,0
+47,Hanzchia marina,10.5000,-0.68,10,5000,marine,35
+48,Isochrysis galbana,10.5000,0.42,10,5000,marine,35
+49,Isochrysis aff. galbana,10.5000,0.06,10,5000,marine,35
+50,Nannochlorois oculata,10.5000,0.01,10,5000,marine,35
+51,Nannochloris salina,10.5000,0.04,10,5000,marine,35
+52,Navicula incerta,10.5000,0.37,10,5000,marine,35
+53,Nitzscia sp.,10.5000,0.2,10,5000,marine,35
+54,Skeletonema costatum,10.5000,0.66,10,5000,marine,35
+55,Tetraselmus suecica,10.5000,0.42,10,5000,marine,35
+56,Thalassiosira fluviatilis,10.5000,0.1,10,5000,marine,35
+57,Thalassiosira sp.,10.5000,-0.04,10,5000,marine,35
+58,Caloneis schroderi,10.2500,0.25,10,2500,freshwater,0
+59,Chaetoceros gracilis,10.2500,0.07,10,2500,marine,35
+60,Chaetoceros simplex,10.2500,0.55,10,2500,marine,35
+61,Chlorella ellipsoidea,10.2500,0.53,10,2500,freshwater,0
+62,Chlorella stigmatophora,10.2500,0.24,10,2500,marine,35
+63,Chlorella vulgaris (freshwater),10.2500,0.17,10,2500,freshwater,0
+64,Dunaniella tertiolecta,10.2500,0.42,10,2500,marine,35
+65,Cyclotella sp. NUFP-9,10.2500,-0.1,10,2500,freshwater,0
+66,Hanzchia marina,10.2500,-0.21,10,2500,marine,35
+67,Isochrysis galbana,10.2500,0.25,10,2500,marine,35
+68,Isochrysis aff. galbana,10.2500,-0.14,10,2500,marine,35
+69,Nannochlorois oculata,10.2500,0.04,10,2500,marine,35
+70,Nannochloris salina,10.2500,0.54,10,2500,marine,35
+71,Navicula incerta,10.2500,0.22,10,2500,marine,35
+72,Nitzscia sp.,10.2500,0.23,10,2500,marine,35
+73,Skeletonema costatum,10.2500,0.61,10,2500,marine,35
+74,Tetraselmus suecica,10.2500,0.28,10,2500,marine,35
+75,Thalassiosira fluviatilis,10.2500,0.11,10,2500,marine,35
+76,Thalassiosira sp.,10.2500,-0.12,10,2500,marine,35
+77,Caloneis schroderi,25.5000,0.28,25,5000,freshwater,0
+78,Chaetoceros gracilis,25.5000,0.52,25,5000,marine,35
+79,Chaetoceros simplex,25.5000,0.47,25,5000,marine,35
+80,Chlorella ellipsoidea,25.5000,0.88,25,5000,freshwater,0
+81,Chlorella stigmatophora,25.5000,0.78,25,5000,marine,35
+82,Chlorella vulgaris (freshwater),25.5000,0.68,25,5000,freshwater,0
+83,Dunaniella tertiolecta,25.5000,0.6,25,5000,marine,35
+84,Cyclotella sp. NUFP-9,25.5000,0,25,5000,freshwater,0
+85,Hanzchia marina,25.5000,0.21,25,5000,marine,35
+86,Isochrysis galbana,25.5000,0.55,25,5000,marine,35
+87,Isochrysis aff. galbana,25.5000,0.78,25,5000,marine,35
+88,Nannochlorois oculata,25.5000,0.85,25,5000,marine,35
+89,Nannochloris salina,25.5000,-0.32,25,5000,marine,35
+90,Navicula incerta,25.5000,0.39,25,5000,marine,35
+91,Nitzscia sp.,25.5000,0.23,25,5000,marine,35
+92,Skeletonema costatum,25.5000,0.6,25,5000,marine,35
+93,Tetraselmus suecica,25.5000,0.46,25,5000,marine,35
+94,Thalassiosira fluviatilis,25.5000,-0.03,25,5000,marine,35
+95,Thalassiosira sp.,25.5000,0.13,25,5000,marine,35
+96,Caloneis schroderi,25.2500,0.3,25,2500,freshwater,0
+97,Chaetoceros gracilis,25.2500,0.39,25,2500,marine,35
+98,Chaetoceros simplex,25.2500,0.52,25,2500,marine,35
+99,Chlorella ellipsoidea,25.2500,0.85,25,2500,freshwater,0
+100,Chlorella stigmatophora,25.2500,0.56,25,2500,marine,35
+101,Chlorella vulgaris (freshwater),25.2500,0.67,25,2500,freshwater,0
+102,Dunaniella tertiolecta,25.2500,0.64,25,2500,marine,35
+103,Cyclotella sp. NUFP-9,25.2500,0,25,2500,freshwater,0
+104,Hanzchia marina,25.2500,0.15,25,2500,marine,35
+105,Isochrysis galbana,25.2500,0.55,25,2500,marine,35
+106,Isochrysis aff. galbana,25.2500,0.81,25,2500,marine,35
+107,Nannochlorois oculata,25.2500,0.92,25,2500,marine,35
+108,Nannochloris salina,25.2500,-0.34,25,2500,marine,35
+109,Navicula incerta,25.2500,0.37,25,2500,marine,35
+110,Nitzscia sp.,25.2500,0.29,25,2500,marine,35
+111,Skeletonema costatum,25.2500,0.67,25,2500,marine,35
+112,Tetraselmus suecica,25.2500,0.44,25,2500,marine,35
+113,Thalassiosira fluviatilis,25.2500,0.1,25,2500,marine,35
+114,Thalassiosira sp.,25.2500,0.15,25,2500,marine,35
+115,Caloneis schroderi,30.5000,0.38,30,5000,freshwater,0
+116,Chaetoceros gracilis,30.5000,0.62,30,5000,marine,35
+117,Chaetoceros simplex,30.5000,0.54,30,5000,marine,35
+118,Chlorella ellipsoidea,30.5000,0.98,30,5000,freshwater,0
+119,Chlorella stigmatophora,30.5000,0.66,30,5000,marine,35
+120,Chlorella vulgaris (freshwater),30.5000,-0.29,30,5000,freshwater,0
+121,Dunaniella tertiolecta,30.5000,0.6,30,5000,marine,35
+122,Cyclotella sp. NUFP-9,30.5000,-0.18,30,5000,freshwater,0
+123,Hanzchia marina,30.5000,0.11,30,5000,marine,35
+124,Isochrysis galbana,30.5000,0.52,30,5000,marine,35
+125,Isochrysis aff. galbana,30.5000,0.76,30,5000,marine,35
+126,Nannochlorois oculata,30.5000,1.09,30,5000,marine,35
+127,Nannochloris salina,30.5000,0.46,30,5000,marine,35
+128,Navicula incerta,30.5000,0.48,30,5000,marine,35
+129,Nitzscia sp.,30.5000,0.46,30,5000,marine,35
+130,Skeletonema costatum,30.5000,0.48,30,5000,marine,35
+131,Tetraselmus suecica,30.5000,0.55,30,5000,marine,35
+132,Thalassiosira fluviatilis,30.5000,0.28,30,5000,marine,35
+133,Thalassiosira sp.,30.5000,0.4,30,5000,marine,35
+134,Caloneis schroderi,30.2500,0.29,30,2500,freshwater,0
+135,Chaetoceros gracilis,30.2500,0.73,30,2500,marine,35
+136,Chaetoceros simplex,30.2500,0.63,30,2500,marine,35
+137,Chlorella ellipsoidea,30.2500,0.94,30,2500,freshwater,0
+138,Chlorella stigmatophora,30.2500,0.39,30,2500,marine,35
+139,Chlorella vulgaris (freshwater),30.2500,-0.2,30,2500,freshwater,0
+140,Dunaniella tertiolecta,30.2500,0.45,30,2500,marine,35
+141,Cyclotella sp. NUFP-9,30.2500,-0.19,30,2500,freshwater,0
+142,Hanzchia marina,30.2500,0.06,30,2500,marine,35
+143,Isochrysis galbana,30.2500,0.51,30,2500,marine,35
+144,Isochrysis aff. galbana,30.2500,0.74,30,2500,marine,35
+145,Nannochlorois oculata,30.2500,1.14,30,2500,marine,35
+146,Nannochloris salina,30.2500,0.06,30,2500,marine,35
+147,Navicula incerta,30.2500,0.35,30,2500,marine,35
+148,Nitzscia sp.,30.2500,0.4,30,2500,marine,35
+149,Skeletonema costatum,30.2500,0.43,30,2500,marine,35
+150,Tetraselmus suecica,30.2500,0.51,30,2500,marine,35
+151,Thalassiosira fluviatilis,30.2500,0.23,30,2500,marine,35
+152,Thalassiosira sp.,30.2500,0.41,30,2500,marine,35

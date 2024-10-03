@@ -6,44 +6,53 @@ library(shinyAce)
 library(magrittr)
 library(ggplot2)
 library(png)
+library(readr)
 
 readme_url <- "https://raw.githubusercontent.com/ivelasq/rplot-alt-text-generator/main/guidelines.md"
 readme_content <- paste(readLines(readme_url, warn = FALSE), collapse = "\n")
 
 ui <- page_sidebar(
   title = "altR",
-  theme = bs_theme(
-    bootswatch = "simplex",
-    base_font = font_google("Lexend"),
-    navbar_bg = "#39254D"
-  ),
-  sidebar = sidebar(width = 500, tabsetPanel(
-    tabPanel(
-      "Generate Plot",
-      aceEditor(
-        "code",
-        mode = "r",
-        theme = "eclipse",
-        height = "400px",
-        fontSize = "16",
-        value = "plot(mtcars$hp)",
-        placeholder = "Enter R code that generates a plot"
+  theme = bs_theme(base_font = font_google("Lexend"), ),
+  sidebar = sidebar(
+    width = 500,
+    open = "always",
+    tabsetPanel(
+      tabPanel(
+        "Generate Plot",
+        HTML("<br>"),
+        fileInput("data_file", "Upload Data File (CSV)"),
+        textInput("data_object_name", "Name the Data Object", value = "data"),
+        actionButton("load_data", "Load Data"),
+        textOutput("upload_status"),
+        HTML("<br>"),
+        aceEditor(
+          "code",
+          mode = "r",
+          theme = "eclipse",
+          height = "250px",
+          fontSize = "16",
+          value = "plot(mtcars$hp)",
+          placeholder = "Enter R code that generates a plot"
+        ),
+        actionButton("generate_plot", "Generate visualization and alt text")
       ),
-      actionButton("generate_plot", "Generate visualization and alt text")
-    ),
-    tabPanel(
-      "Upload Plot",
-      fileInput("plot_upload", label = "", accept = c("image/png"))
+      tabPanel("Upload Plot", fileInput(
+        "plot_upload",
+        label = "",
+        accept = c("image/png")
+      ))
     )
-  )),
+  ),
   card(
     card_header("Plot"),
     plotOutput("plot", height = "400px"),
     verbatimTextOutput("error")
   ),
   card(
-    card_header("Generated alternative text"),
-    tags$div(style = "height: 150px; overflow-y: auto;", tags$p(id = "alt_text_output", ""))),
+    card_header("Generated Alternative Text"),
+    tags$div(style = "height: 150px; overflow-y: auto;", tags$p(id = "alt_text_output", ""))
+  ),
   tags$script(
     HTML(
       "
@@ -55,7 +64,6 @@ ui <- page_sidebar(
     )
   )
 )
-
 server <- function(input, output, session) {
   chat <- elmer::new_chat_openai(
     model = "gpt-4o-mini",
@@ -68,6 +76,35 @@ server <- function(input, output, session) {
     ),
     echo = TRUE
   )
+  
+  uploaded_data <- reactiveVal(NULL)
+  
+  observeEvent(input$load_data, {
+    req(input$data_file)
+    
+    data <- tryCatch({
+      read_csv(input$data_file$datapath, locale = locale(encoding = "UTF-8"))
+    }, error = function(e) {
+      showModal(
+        modalDialog(
+          title = "Error Uploading File",
+          "The uploaded file could not be read. Please make sure it is a valid CSV file.",
+          easyClose = TRUE
+        )
+      )
+      output$upload_status <- renderText("Failed to upload file.")
+      return(NULL)
+    })
+    
+    if (is.null(data)) {
+      output$upload_status <- renderText("Failed to upload file.")
+      return()
+    }
+    
+    uploaded_data(data)
+    assign(input$data_object_name, data, envir = .GlobalEnv)
+    output$upload_status <- renderText("File uploaded successfully.")
+  })
   
   plot_generated <- reactiveVal(FALSE)
   uploaded_plot <- reactiveVal(NULL)
