@@ -60,7 +60,8 @@ server <- function(input, output, session) {
   chat <- elmer::new_chat_openai(
     model = "gpt-4o-mini",
     system_prompt = paste(
-      "Generate a friendly and descriptive alt text for the following plot.",
+      "Generate clear, concise, but descriptive alt text for the following plot.",
+      "Do not provide commentary or suggestions on how to improve the accessibility.",
       "Refer to the following guidelines:\n\n",
       readme_content,
       "If, and only if, the code does not produce a valid plot, instead, give suggestions on how to fix the code."
