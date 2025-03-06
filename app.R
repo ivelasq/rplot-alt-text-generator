@@ -21,7 +21,7 @@ ui <- page_sidebar(
       tabPanel(
         "Generate Plot",
         HTML("<br>"),
-        fileInput("data_file", "Upload Data File (CSV)"),
+        fileInput("data_file", "Upload Data File (CSV)", placeholder = "Max filesize: 5MB"),
         textInput("data_object_name", "Name the Data Object", value = "data"),
         actionButton("load_data", "Load Data"),
         textOutput("upload_status"),
@@ -68,7 +68,7 @@ server <- function(input, output, session) {
   chat <- ellmer::chat_openai(
     model = "gpt-4o-mini",
     system_prompt = paste(
-      "Generate clear, concise, but descriptive alt text for the following plot.",
+      "Generate clear and descriptive alternative text for the following plot.",
       "Do not provide commentary or suggestions on how to improve the accessibility.",
       "Refer to the following guidelines:\n\n",
       readme_content,
@@ -83,6 +83,23 @@ server <- function(input, output, session) {
     req(input$data_file)
     
     data <- tryCatch({
+      if (!is.null(input$data_file) &&
+          input$data_file$size > 5 * 1024 * 1024) {
+        showModal(
+          modalDialog(
+            title = "File Size Exceeded",
+            "The uploaded file exceeds the 5MB size limit.",
+            easyClose = TRUE
+          )
+        )
+        output$upload_status <- renderText("File size too large.")
+        return(NULL)
+      }
+      
+      if (is.null(input$data_file)) {
+        return(NULL)
+      }
+      
       read_csv(input$data_file$datapath, locale = locale(encoding = "UTF-8"))
     }, error = function(e) {
       showModal(
@@ -95,11 +112,6 @@ server <- function(input, output, session) {
       output$upload_status <- renderText("Failed to upload file.")
       return(NULL)
     })
-    
-    if (is.null(data)) {
-      output$upload_status <- renderText("Failed to upload file.")
-      return()
-    }
     
     uploaded_data(data)
     assign(input$data_object_name, data, envir = .GlobalEnv)
