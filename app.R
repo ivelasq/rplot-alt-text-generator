@@ -1,7 +1,7 @@
 library(shiny)
 library(bslib)
 library(shinychat)
-library(elmer)
+library(ellmer)
 library(shinyAce)
 library(magrittr)
 library(ggplot2)
@@ -65,8 +65,7 @@ ui <- page_sidebar(
   )
 )
 server <- function(input, output, session) {
-  chat <- elmer::new_chat_openai(
-    model = "gpt-4o-mini",
+  chat <- ellmer::chat_gemini(
     system_prompt = paste(
       "Generate clear, concise, but descriptive alt text for the following plot.",
       "Do not provide commentary or suggestions on how to improve the accessibility.",
@@ -153,7 +152,7 @@ server <- function(input, output, session) {
     } else if (!is.null(uploaded_plot())) {
       file_path <- uploaded_plot()$datapath
       alt_text_response <- chat$chat(
-        elmer::content_image_file(file_path),
+        ellmer::content_image_file(file_path),
         "Please generate an alt text for this plot image."
       )
       session$sendCustomMessage("update_alt_text", alt_text_response)
