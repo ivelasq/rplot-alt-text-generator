@@ -65,7 +65,7 @@ ui <- page_sidebar(
   )
 )
 server <- function(input, output, session) {
-  chat <- ellmer::chat_open(
+  chat <- ellmer::chat_openai(
     model = "gpt-4o-mini",
     system_prompt = paste(
       "Generate clear, concise, but descriptive alt text for the following plot.",
