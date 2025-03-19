@@ -7,6 +7,8 @@ library(magrittr)
 library(ggplot2)
 library(png)
 library(readr)
+library(magick)
+library(gitlink)
 
 readme_url <- "https://raw.githubusercontent.com/ivelasq/rplot-alt-text-generator/main/guidelines.md"
 readme_content <- paste(readLines(readme_url, warn = FALSE), collapse = "\n")
@@ -14,6 +16,8 @@ readme_content <- paste(readLines(readme_url, warn = FALSE), collapse = "\n")
 ui <- page_sidebar(
   title = "altR",
   theme = bs_theme(base_font = font_google("Lexend"), ),
+  ribbon_css("https://github.com/ivelasq/pharma-adae-shiny-app",
+             text = "Fork me on GitHub Repo"),
   sidebar = sidebar(
     width = 500,
     open = "always",

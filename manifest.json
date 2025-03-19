@@ -1036,6 +1036,34 @@
         "RemoteSha": "3.5.1"
       }
     },
+    "gitlink": {
+      "Source": "CRAN",
+      "Repository": "https://cloud.r-project.org",
+      "description": {
+        "Package": "gitlink",
+        "Title": "Add 'Git' Links to Your Web Based Assets",
+        "Version": "0.1.3",
+        "Authors@R": "\n    c(person(given = \"Cole\",\n             family = \"Arendt\",\n             role = c(\"aut\", \"cre\"),\n             email = \"cole@rstudio.com\"),\n      person(given = \"RStudio\",\n             role = c(\"cph\", \"fnd\")))",
+        "Description": "Provides helpers to add 'Git' links to 'shiny'\n    applications, 'rmarkdown' documents, and other 'HTML' based resources.\n    This is most commonly used for 'GitHub' ribbons.",
+        "License": "MIT + file LICENSE",
+        "URL": "https://github.com/colearendt/gitlink",
+        "BugReports": "https://github.com/colearendt/gitlink/issues",
+        "Depends": "R (>= 3.1)",
+        "Imports": "htmltools (>= 0.3.6), rlang (>= 0.3.1)",
+        "Suggests": "covr (>= 3.0.1), spelling (>= 2.0), testthat (>= 2.0.0.9000),\nrmarkdown, fs, rprojroot, shiny",
+        "Encoding": "UTF-8",
+        "Language": "en-US",
+        "LazyData": "true",
+        "RoxygenNote": "6.1.1",
+        "NeedsCompilation": "no",
+        "Packaged": "2019-07-19 12:44:55 UTC; carendt",
+        "Author": "Cole Arendt [aut, cre],\n  RStudio [cph, fnd]",
+        "Maintainer": "Cole Arendt <cole@rstudio.com>",
+        "Repository": "CRAN",
+        "Date/Publication": "2019-07-23 12:20:02 UTC",
+        "Built": "R 4.4.0; ; 2024-04-06 00:37:52 UTC; unix"
+      }
+    },
     "glue": {
       "Source": "CRAN",
       "Repository": "https://cloud.r-project.org",
@@ -2702,7 +2730,7 @@
   },
   "files": {
     "app.R": {
-      "checksum": "791cdf82081fa6154d6f56689bdbe5bd"
+      "checksum": "a06cf9d9c298856dcc12443b827bb153"
     },
     "examples/algae_plot.R": {
       "checksum": "d2d7a76467ad6543683cf0f5b675781f"
