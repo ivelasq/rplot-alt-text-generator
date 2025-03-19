@@ -16,8 +16,8 @@ readme_content <- paste(readLines(readme_url, warn = FALSE), collapse = "\n")
 ui <- page_sidebar(
   title = "altR",
   theme = bs_theme(base_font = font_google("Lexend"), ),
-  ribbon_css("https://github.com/ivelasq/pharma-adae-shiny-app",
-             text = "Fork me on GitHub Repo"),
+  ribbon_css("https://github.com/ivelasq/rplot-alt-text-generator",
+             text = "Link to GitHub Repo"),
   sidebar = sidebar(
     width = 500,
     open = "always",
