@@ -14,7 +14,7 @@ readme_url <- "https://raw.githubusercontent.com/ivelasq/rplot-alt-text-generato
 readme_content <- paste(readLines(readme_url, warn = FALSE), collapse = "\n")
 
 ui <- page_sidebar(
-  title = "altR",
+  title = "altR: R Plot Alternative Text Generator",
   theme = bs_theme(base_font = font_google("Lexend"), ),
   ribbon_css("https://github.com/ivelasq/rplot-alt-text-generator",
              text = "Link to GitHub Repo"),
